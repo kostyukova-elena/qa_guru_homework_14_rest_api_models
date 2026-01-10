@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 import static io.qameta.allure.Allure.step;
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static spec.Specification.createResponseSpec;
+import static spec.Specification.userRequestSpec;
 
 public class UsersTest extends BaseTest {
 
@@ -18,7 +20,7 @@ public class UsersTest extends BaseTest {
                         .when()
                         .get("/users")
                         .then()
-                        .spec(userResponseSpec)
+                        .spec(createResponseSpec(200))
                         .extract().as(UserListResponse.class));
 
         step("Check response", () -> {
@@ -38,7 +40,7 @@ public class UsersTest extends BaseTest {
                         .when()
                         .get("/users")
                         .then()
-                        .spec(userResponseSpec)
+                        .spec(createResponseSpec(200))
                         .extract().as(UserListResponse.class));
 
         step("Check response", () -> {
@@ -57,7 +59,7 @@ public class UsersTest extends BaseTest {
                         .when()
                         .get("/users")
                         .then()
-                        .spec(userResponseSpec)
+                        .spec(createResponseSpec(200))
                         .extract().as(UserListResponse.class));
 
         step("Check response", () -> {
@@ -76,7 +78,7 @@ public class UsersTest extends BaseTest {
                         .when()
                         .get("/users")
                         .then()
-                        .spec(userResponseSpec)
+                        .spec(createResponseSpec(200))
                         .extract().as(UserListResponse.class));
 
         step("Check response", () -> {
@@ -94,7 +96,7 @@ public class UsersTest extends BaseTest {
                         .when()
                         .get("/users/999")
                         .then()
-                        .spec(nonExistentUserResponseSpec));
+                        .spec(createResponseSpec(404)));
     }
 
     @Test
@@ -105,6 +107,6 @@ public class UsersTest extends BaseTest {
                         .when()
                         .delete("/users/6")
                         .then()
-                        .spec(deleteUsersIdResponseSpec));
+                        .spec(createResponseSpec(204)));
     }
 }
